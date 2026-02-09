@@ -1,0 +1,25 @@
+{
+  "name": "@your-org/pw-foundations",
+  "version": "0.1.0",
+  "description": "Foundational utilities for Playwright testing frameworks",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "playwright test",
+    "lint": "eslint src tests",
+    "build": "tsc",
+    "format": "prettier --write src tests"
+  },
+  "keywords": ["playwright", "testing", "e2e", "automation"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-playwright": "^0.15.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}
