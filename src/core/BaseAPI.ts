@@ -1,5 +1,5 @@
 import { APIRequestContext, APIResponse as PlaywrightAPIResponse } from '@playwright/test';
-import { APIResponse, AuthConfig, RequestOptions } from '../types/api.types';
+import { APIResponse, AuthConfig } from '../types/api.types';
 import { Logger } from '../utils/Logger';
 
 /**

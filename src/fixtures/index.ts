@@ -1,5 +1,5 @@
 // Test fixtures
-import { test as base, Page, APIRequestContext, TestInfo } from '@playwright/test';
+import { test as base, Page } from '@playwright/test';
 import { BaseAPI } from '../core/BaseAPI';
 import { DataFactory } from '../utils/DataFactory';
 import { Logger } from '../utils/Logger';
@@ -68,4 +68,4 @@ export const test = loggerFixture;
 export { authFixture, apiFixture, dataFixture, loggerFixture };
 
 // For merging into consumer projects
-export const frameworkFixtures: FrameworkFixtures = {} as any; // Placeholder
+export const frameworkFixtures: FrameworkFixtures = {} as FrameworkFixtures;

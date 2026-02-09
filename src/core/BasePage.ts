@@ -118,7 +118,7 @@ export class BasePage {
     try {
       Logger.info('Waiting for navigation', { urlPattern });
       await Promise.all([
-        urlPattern ? this.page.waitForURL(urlPattern) : this.page.waitForLoadState('networkidle'),
+        urlPattern ? this.page.waitForURL(urlPattern) : this.page.waitForLoadState('domcontentloaded'),
         action()
       ]);
       Logger.info('Navigation completed', { url: this.page.url() });

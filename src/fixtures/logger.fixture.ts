@@ -1,4 +1,4 @@
-import { test as base, TestInfo } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import { Logger } from '../utils/Logger';
 
 /**

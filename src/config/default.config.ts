@@ -44,7 +44,6 @@ export function createConfig(overrides: Partial<FrameworkConfig> = {}): ReturnTy
         use: { ...devices['Desktop Firefox'] },
       },
     ],
-    environments: {},
   };
 
   // Deep merge defaults with overrides
@@ -55,6 +54,7 @@ export function createConfig(overrides: Partial<FrameworkConfig> = {}): ReturnTy
   const finalWithConsumerEnv = deepMerge(final, consumerEnvConfig);
 
   // Remove environments from final config as it's not part of Playwright config
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { environments, ...playwrightConfig } = finalWithConsumerEnv;
 
   return defineConfig(playwrightConfig);
@@ -66,23 +66,24 @@ export function createConfig(overrides: Partial<FrameworkConfig> = {}): ReturnTy
  * @param source Source object
  * @returns Merged object
  */
-function deepMerge<T extends Record<string, any>>(target: T, source: Partial<T>): T {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function deepMerge(target: any, source: any): any {
   const result = { ...target };
 
   for (const key in source) {
-    if (source.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
       const sourceValue = source[key];
       const targetValue = result[key];
 
       if (Array.isArray(sourceValue)) {
         // Replace arrays entirely
-        result[key] = sourceValue as T[Extract<keyof T, string>];
+        result[key] = sourceValue;
       } else if (sourceValue && typeof sourceValue === 'object' && targetValue && typeof targetValue === 'object' && !Array.isArray(targetValue)) {
         // Deep merge objects
         result[key] = deepMerge(targetValue, sourceValue);
       } else {
         // Replace primitives and null/undefined
-        result[key] = sourceValue as T[Extract<keyof T, string>];
+        result[key] = sourceValue;
       }
     }
   }

@@ -1,4 +1,4 @@
-import { test as base, APIRequestContext } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import { BaseAPI } from '../core/BaseAPI';
 import { AuthConfig } from '../types/api.types';
 

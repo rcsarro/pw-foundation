@@ -64,10 +64,8 @@ export async function waitForNetworkIdle(
 ): Promise<void> {
   return new Promise((resolve) => {
     let timeoutId: NodeJS.Timeout;
-    let lastActivity = Date.now();
 
     const resetTimer = () => {
-      lastActivity = Date.now();
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         page.off('request', resetTimer);
