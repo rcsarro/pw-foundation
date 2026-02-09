@@ -6,9 +6,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "playwright test",
-    "lint": "eslint src tests",
+    "lint": "eslint src",
     "build": "tsc",
-    "format": "prettier --write src tests"
+    "format": "prettier --write src"
   },
   "keywords": ["playwright", "testing", "e2e", "automation"],
   "author": "",
