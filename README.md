@@ -1,4 +1,4 @@
-# playwright-forge
+# pw-foundation
 
 Foundational utilities for Playwright testing frameworks.
 
