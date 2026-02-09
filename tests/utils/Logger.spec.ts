@@ -2,6 +2,12 @@ import { test, expect } from '@playwright/test';
 import { Logger } from '../../src/utils/Logger';
 
 test.describe('Logger', () => {
+  test.describe.configure({ mode: 'serial' });
+
+  test.beforeEach(() => {
+    Logger.clearLogs();
+  });
+
   test.afterEach(() => {
     Logger.clearLogs();
   });

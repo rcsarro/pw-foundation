@@ -1,2 +1,3 @@
 // Configuration
-export {};
+export * from './default.config';
+export * from './environments';

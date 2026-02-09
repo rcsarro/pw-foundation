@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
  * DataFactory provides deterministic test data generation using faker.js.
  * Seed can be set via DATA_SEED environment variable for reproducible CI runs.
  */
-class DataFactory {
+export class DataFactory {
   constructor() {
     const seed = process.env.DATA_SEED ? parseInt(process.env.DATA_SEED, 10) : Date.now();
     faker.seed(seed);
