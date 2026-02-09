@@ -1,4 +1,5 @@
 // Import faker using require to handle ES module compatibility
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { faker } = require('@faker-js/faker');
 
 /**
