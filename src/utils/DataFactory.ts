@@ -1,4 +1,5 @@
-import { faker } from '@faker-js/faker';
+// Import faker using require to handle ES module compatibility
+const { faker } = require('@faker-js/faker');
 
 /**
  * DataFactory provides deterministic test data generation using faker.js.
