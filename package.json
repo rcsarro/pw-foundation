@@ -1,13 +1,14 @@
 {
-  "name": "@your-org/pw-foundations",
+  "name": "@your-org/playwright-forge",
   "version": "0.1.0",
   "description": "Foundational utilities for Playwright testing frameworks",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": ["dist", "docs", "README.md", "LICENSE", "CHANGELOG.md"],
   "scripts": {
     "test": "playwright test",
     "lint": "eslint src",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "format": "prettier --write src"
   },
   "keywords": [
