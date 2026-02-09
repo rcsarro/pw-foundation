@@ -17,6 +17,66 @@ pw-foundation provides battle-tested utilities and patterns for building maintai
 - **Well-Documented**: Extensive guides and examples for best practices
 - **Framework-Agnostic**: Works with any Playwright setup, from small projects to enterprise suites
 
+## Usage Patterns
+
+pw-foundation supports multiple adoption strategies based on your team's needs and existing setup:
+
+### 1. Fork and Extend (Framework Customization)
+
+**Best for:** Teams that want to customize the framework itself or contribute back improvements.
+
+```bash
+# Fork the repository
+git clone https://github.com/YOUR_USERNAME/pw-foundation.git
+cd pw-foundation
+
+# Add your custom utilities, fixtures, or base classes
+# Modify existing patterns to fit your organization's needs
+# Your tests can live directly in this forked repository
+```
+
+**Pros:** Full control, easy customization, single repository
+**Cons:** Tightly coupled, harder to update from upstream
+
+### 2. Fork and Import (Library Approach)
+
+**Best for:** Teams with existing test repositories who want to use pw-foundation as a dependency.
+
+```bash
+# Fork pw-foundation for potential customizations
+git clone https://github.com/YOUR_USERNAME/pw-foundation.git
+cd pw-foundation
+
+# Build and publish to your private registry
+npm run build
+npm publish --registry=https://your-registry.com
+
+# Then in your test project:
+npm install @your-org/pw-foundation
+```
+
+**Pros:** Clean separation, easy updates, reusable across projects
+**Cons:** Requires private registry setup
+
+### 3. Direct Import (Clean Start)
+
+**Best for:** New projects or teams starting fresh with pw-foundation.
+
+```bash
+# Create new test repository
+mkdir my-app-e2e-tests
+cd my-app-e2e-tests
+npm init -y
+
+# Install pw-foundation
+npm install @your-org/playwright-forge
+
+# Start building your page objects and tests
+```
+
+**Pros:** Clean architecture, easy setup, follows standard npm workflow
+**Cons:** Limited customization without forking
+
 ## Quick Start
 
 Get up and running in under 5 minutes:
