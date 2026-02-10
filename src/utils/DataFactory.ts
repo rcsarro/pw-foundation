@@ -1,6 +1,5 @@
 // Import faker using require to handle ES module compatibility
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { faker } = require('@faker-js/faker');
+const { faker } = require('@faker-js/faker'); // eslint-disable-line @typescript-eslint/no-var-requires
 
 /**
  * DataFactory provides deterministic test data generation using faker.js.
