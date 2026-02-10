@@ -1,15 +1,26 @@
-// Import faker using require to handle ES module compatibility
-const { faker } = require('@faker-js/faker'); // eslint-disable-line @typescript-eslint/no-var-requires
+import type { Faker } from '@faker-js/faker';
 
 /**
  * DataFactory provides deterministic test data generation using faker.js.
  * Seed can be set via DATA_SEED environment variable for reproducible CI runs.
  */
 export class DataFactory {
-  constructor() {
+  private faker: Faker;
+
+  private constructor(faker: Faker) {
+    this.faker = faker;
     const seed = process.env.DATA_SEED ? parseInt(process.env.DATA_SEED, 10) : Date.now();
-    faker.seed(seed);
+    this.faker.seed(seed);
     console.log(`DataFactory seeded with: ${seed}`);
+  }
+
+  /**
+   * Creates a new DataFactory instance with faker dynamically imported.
+   * This method handles ES module compatibility issues.
+   */
+  static async create(): Promise<DataFactory> {
+    const { faker } = await import('@faker-js/faker');
+    return new DataFactory(faker);
   }
 
   /**
@@ -17,10 +28,10 @@ export class DataFactory {
    * @returns Object with firstName, lastName, email, password
    */
   randomUser(): { firstName: string; lastName: string; email: string; password: string } {
-    const firstName = faker.person.firstName();
-    const lastName = faker.person.lastName();
-    const email = faker.internet.email({ firstName, lastName });
-    const password = faker.internet.password();
+    const firstName = this.faker.person.firstName();
+    const lastName = this.faker.person.lastName();
+    const email = this.faker.internet.email({ firstName, lastName });
+    const password = this.faker.internet.password();
 
     return { firstName, lastName, email, password };
   }
@@ -31,7 +42,7 @@ export class DataFactory {
    * @returns Random email string
    */
   randomEmail(domain?: string): string {
-    return faker.internet.email({ provider: domain });
+    return this.faker.internet.email({ provider: domain });
   }
 
   /**
@@ -40,7 +51,7 @@ export class DataFactory {
    * @returns Random string
    */
   randomString(length: number): string {
-    return faker.string.alphanumeric(length);
+    return this.faker.string.alphanumeric(length);
   }
 
   /**
@@ -50,8 +61,6 @@ export class DataFactory {
    * @returns Random number
    */
   randomNumber(min: number, max: number): number {
-    return faker.number.int({ min, max });
+    return this.faker.number.int({ min, max });
   }
 }
-
-export const dataFactory = new DataFactory();

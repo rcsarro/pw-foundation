@@ -9,7 +9,7 @@ export const dataFixture = base.extend<{
 }>({
   testData: async ({ }, use: (dataFactory: DataFactory) => Promise<void>) => {
     // Seed with test-specific value for deterministic but unique data
-    const dataFactory = new DataFactory();
+    const dataFactory = await DataFactory.create();
     // Note: In a real implementation, you'd need to modify DataFactory to accept seed
     // For now, we'll use the default seeding
 

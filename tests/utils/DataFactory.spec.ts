@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { dataFactory } from '../../src/utils/DataFactory';
+import { DataFactory } from '../../src/utils/DataFactory';
 
 test.describe('DataFactory', () => {
-  test('randomUser generates valid user object', () => {
+  test('randomUser generates valid user object', async () => {
+    const dataFactory = await DataFactory.create();
     const user = dataFactory.randomUser();
 
     expect(user).toHaveProperty('firstName');
@@ -16,46 +17,47 @@ test.describe('DataFactory', () => {
     expect(user.email).toContain('@');
   });
 
-  test('randomEmail generates valid email', () => {
+  test('randomEmail generates valid email', async () => {
+    const dataFactory = await DataFactory.create();
     const email = dataFactory.randomEmail();
     expect(typeof email).toBe('string');
     expect(email).toContain('@');
   });
 
-  test('randomEmail with domain', () => {
+  test('randomEmail with domain', async () => {
+    const dataFactory = await DataFactory.create();
     const email = dataFactory.randomEmail('example.com');
     expect(email).toContain('@example.com');
   });
 
-  test('randomString generates string of correct length', () => {
+  test('randomString generates string of correct length', async () => {
+    const dataFactory = await DataFactory.create();
     const str = dataFactory.randomString(10);
     expect(typeof str).toBe('string');
     expect(str.length).toBe(10);
   });
 
-  test('randomNumber generates number in range', () => {
+  test('randomNumber generates number in range', async () => {
+    const dataFactory = await DataFactory.create();
     const num = dataFactory.randomNumber(5, 15);
     expect(typeof num).toBe('number');
     expect(num).toBeGreaterThanOrEqual(5);
     expect(num).toBeLessThanOrEqual(15);
   });
 
-  test('deterministic generation with seed', () => {
+  test('deterministic generation with seed', async () => {
     // Set seed via environment
     process.env.DATA_SEED = '12345';
 
-    // Re-import to get new instance with seed
-    delete require.cache[require.resolve('../../src/utils/DataFactory')];
-    const { dataFactory: seededFactory } = require('../../src/utils/DataFactory');
+    const seededFactory = await DataFactory.create();
 
     const user1 = seededFactory.randomUser();
     const email1 = seededFactory.randomEmail();
     const str1 = seededFactory.randomString(5);
     const num1 = seededFactory.randomNumber(1, 100);
 
-    // Reset and get same results
-    delete require.cache[require.resolve('../../src/utils/DataFactory')];
-    const { dataFactory: seededFactory2 } = require('../../src/utils/DataFactory');
+    // Create another instance with same seed
+    const seededFactory2 = await DataFactory.create();
 
     const user2 = seededFactory2.randomUser();
     const email2 = seededFactory2.randomEmail();

@@ -49,7 +49,7 @@ const apiFixture = authFixture.extend<{ apiClient: BaseAPI }>({
 
 const dataFixture = apiFixture.extend<{ testData: DataFactory }>({
   testData: async ({ }, use: (dataFactory: DataFactory) => Promise<void>) => {
-    const dataFactory = new DataFactory();
+    const dataFactory = await DataFactory.create();
     await use(dataFactory);
   },
 });
